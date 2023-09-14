@@ -1,0 +1,145 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="page-wrapper chiller-theme sidebar-bg bg2 toggled border-radius-on">
+    <main class="page-content pt-2">
+
+        <app-menu [usuario]="usuario"></app-menu>
+
+        <div class="container-fluid p-5">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="page-title">Cargar Reservas</h4>
+                </div>
+                <div class="col-md-4" style="text-align: right !important;">
+                    <ul class="breadcrumbs">
+                        <li><a [routerLink]="['/administrador/sede']">GAL</a></li>
+                        <li><span>Cargar Reservas</span></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <br>
+                                    <button type="button" class="btn btn-block btn-success" (click)="listarUltimaFechaReserva()">
+                                        Agregar Reservas &nbsp;&nbsp;<i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-row" *ngIf="verContenedorFechas">
+                                <div class="form-group col-md-4">
+                                    <span class="label"><b>Fecha Inicio</b></span>
+                                    <input type="date" class="form-control" [(ngModel)]="fechaInicio"
+                                        [min]="fechaInicioMin" (ngModelChange)="validarFechas(fechaInicio)">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <span class="label"><b>Fecha Fin</b></span>
+                                    <input type="date" class="form-control" [(ngModel)]="fechaFinalizacion"
+                                        [min]="fechaFinMin" [disabled]="fechaFinDisabled">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <br>
+                                    <button type="button" class="btn btn-block btn-primary" (click)="guardarLogReserva()">
+                                        Generar Reservas &nbsp;&nbsp;<i class="fas fa-tools"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+
+                                    <thead class="thead-dark">
+                                        <tr style="text-align: center;">
+                                            <th scope="col"><b>ID</b></th>
+                                            <th scope="col"><b>Descripción</b></th>
+                                            <th scope="col"><b>Fecha Generación</b></th>
+                                            <th scope="col"><b>Estado</b></th>
+                                            <th scope="col"><b>Rango Fechas Inicio</b></th>
+                                            <th scope="col"><b>Rango Fechas Fin</b></th>
+                                            <th colspan="2" scope="col"><b>Opciones</b></th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody style="vertical-align: middle;">
+                                        <tr *ngFor="let log of listadoLogReservas; index as i" style="text-align: center;">
+
+                                            <td style="vertical-align:middle;"><b>{{ i+1 }}</b></td>
+                                            <td style="vertical-align:middle;"><b>{{ log.descripcion }}</b></td>
+                                            <td style="vertical-align:middle;">{{ log.fechaCreacion }}</td>
+                                            <td style="vertical-align:middle;">{{ log.estado }}</td>
+                                            <td style="vertical-align:middle;">{{ log.fechaInicioReservas }}</td>
+                                            <td style="vertical-align:middle;">{{ log.fechaFinReservas }}</td>
+
+                                            <td>
+                                                <button class="btn btn-outline-success btn-block" (click)="listarReservasExportacionDescarga(log)">
+                                                    <i class="fa fa-download fa-lg"></i>
+                                                </button>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-outline-warning btn-block" (click)="abrirModalCargarArchivo(log)">
+                                                    <i class="fa fa-upload fa-lg"></i>
+                                                </button>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="modalCargarArchivo" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Gestión Reservas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <span class="label"><b>Subir Archivo</b></span>
+                    <input type="file" accept=".xlsx" class="form-control" (change)="onFileChange($event)"/>
+                </div><br><br>
+                <div class="form-group col-md-12">
+                    <br>
+                    <button type="file" class="btn btn-block btn-danger" (click)="uploadfile()">
+                        Subir Archivo &nbsp;&nbsp;<i class="fa fa-cloud-upload"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

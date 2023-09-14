@@ -1,0 +1,32 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Verificando Información... </p>
+</ngx-spinner>
+
+<div class="login-box">
+    <form [formGroup]="fmrInicioSesion" (ngSubmit)="verificarUsuario(fmrInicioSesion.value)">
+        <div class="login-form-head">
+            <h4>Iniciar Sesión</h4>
+            <p>Gestión Calendario Particular</p>
+        </div>
+        <div class="login-form-body">
+
+            <br><br>
+
+            <div class="form-gp">
+                <input type="email" formControlName="email" placeholder="Correo Electrónico">
+                <i class="ti-email"></i>
+            </div>
+            <div class="form-gp">
+                <input type="password" formControlName="contrasena" placeholder="Contraseña">
+                <i class="ti-lock"></i>
+            </div>
+            
+            <br><br><br><br>
+            <div class="submit-btn-area">
+                <button type="submit"><b>Ingresar</b></button>
+            </div>
+            <br><br><br>
+            
+        </div>
+    </form>
+</div>

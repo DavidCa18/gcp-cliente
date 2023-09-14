@@ -1,0 +1,58 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="page-wrapper chiller-theme sidebar-bg bg2 toggled border-radius-on">
+    <main class="page-content pt-2">
+
+        <app-menu [usuario]="usuario"></app-menu>
+
+        <div class="container-fluid p-5">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="page-title">Gestión</h4>
+                </div>
+                <div class="col-md-4" style="text-align: right !important;">
+                    <ul class="breadcrumbs">
+                        <li><a [routerLink]="['/administrador/usuario']">GAL</a></li>
+                        <li><span>Roles</span></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <br><br>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+
+                                    <thead class="thead-dark">
+                                        <tr style="text-align: center;">
+                                            <th scope="col"><b>ID</b></th>
+                                            <th scope="col"><b>Nombre Rol</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="vertical-align: middle;">
+                                        <tr *ngFor="let rol of lstRoles; index as i" style="text-align: center;">
+                                            <td style="vertical-align:middle;"><b>{{ i+1 }}</b></td>
+                                            <td style="vertical-align:middle;"><b>{{ rol.nombre }}</b></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
